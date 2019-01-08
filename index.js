@@ -1,7 +1,7 @@
 
-import Convert from './convert'
-import maps from './maps'
-import config from './config'
+import Convert from './src/convert'
+import maps from './src/maps'
+import config from './src/config'
 
 function main() {
     const map = Maps["/test/api/user"]
