@@ -5,7 +5,6 @@ export function isPrimitive(value: unknown) {
   return (
     typeof value === "string" ||
     typeof value === "number" ||
-    // $flow-disable-line
     typeof value === "symbol" ||
     typeof value === "boolean"
   );
@@ -13,7 +12,7 @@ export function isPrimitive(value: unknown) {
 
 /**
  */
-export function isString(value: unknown) {
+export function isString(value: unknown): value is string {
   return typeof value === "string";
 }
 
@@ -39,7 +38,7 @@ export function isObject(obj: unknown) {
 /**
  * 数组
  */
-export function isArray(obj: unknown) {
+export function isArray<T>(obj: unknown): obj is Array<unknown> {
   if (obj instanceof Array) {
     return true;
   }
@@ -58,7 +57,7 @@ export function isFunction(obj: unknown) {
 /**
  * 获取原生类型，如： [object Object]
  */
-var _toString = Object.prototype.toString;
+const _toString = Object.prototype.toString;
 
 export function toRawType(value: string) {
   return _toString.call(value).slice(8, -1);

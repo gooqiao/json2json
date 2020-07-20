@@ -12,7 +12,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "jsonpath": "^1.0.0"
+    "@types/lodash": "^4.14.157",
+    "jsonpath": "^1.0.0",
+    "lodash": "^4.17.19"
   },
   "devDependencies": {
     "@types/jest": "^25.2.1",
