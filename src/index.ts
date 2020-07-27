@@ -6,7 +6,7 @@ import model from "./model";
 function main() {
   const map = Maps["/test/api/user"];
   const data = model;
-  let convert = new Convert(data, map, Config);
+  let convert = new Convert(Config);
   const result = convert.getData(data, map);
   console.log(JSON.stringify(result));
 }
