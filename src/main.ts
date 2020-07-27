@@ -1,3 +1,4 @@
+/// <reference path="./types/type.ts" />
 import JP from "jsonpath";
 import {
   isArray,
@@ -16,21 +17,13 @@ function warn(message: string, serious?: boolean) {
   console.warn("DC:" + message);
 }
 
-function handleError(message: string) {
+function handleError(message: string): never {
   throw new Error(message);
 }
 
 class Convert {
   includeUnknownField: boolean;
-  constructor(
-    public data: unknown,
-    public map: ApiMap,
-    public config?: ConfigOptions
-  ) {
-    if (!isPlainObject(map)) {
-      handleError("convert config not is a object");
-    }
-
+  constructor(public config?: ConfigOptions) {
     this.includeUnknownField = config.unknownField === "include";
 
     this.config = config;
@@ -53,6 +46,11 @@ class Convert {
     let result = null;
     const json = model;
     const path = `$.${key}`;
+
+    if (typeof json === "string") {
+      handleError(`error:  value ${json} is not have key : ${key}`);
+    }
+
     result = JP.value(json, path);
     if (formatter) {
       //   , this.data
@@ -111,7 +109,10 @@ class Convert {
     }
     return undefined;
   };
-  getData<T>(source: T, map: ApiMap): unknown | unknown[] {
+  getData<T>(source: T, map: ApiMap): unknown | unknown[] | never {
+    if (!isPlainObject(map)) {
+      handleError("convert config not is a object");
+    }
     if (!source) {
       return undefined;
     }
@@ -134,19 +135,21 @@ class Convert {
         if (isPrivateKey(key)) {
           continue;
         }
-        const childMap = map[key] as MapOptions;
-        const isFormatter = isFunction(childMap._formatter);
+        const childMap = map[key];
+        const isFormatter = (map: any): map is MapOptions => {
+          return isFunction(map._formatter);
+        };
         const dataKey = this.getKey(map, key); // 对方key
         let value = this.getValue(
           dataKey,
           source,
-          isFormatter && childMap._formatter
+          isFormatter(childMap) && childMap._formatter
         ); // 我要的data
         if (key !== dataKey) {
           this.deleteValue(dataKey, result, mapKeys);
         }
         if (isPlainObject(childMap)) {
-          result[key] = this.getData(value, childMap);
+          result[key] = this.getData(value, childMap as ApiMap);
         } else {
           result[key] = value;
         }

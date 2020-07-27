@@ -14,8 +14,10 @@ export default {
       },
     },
     family: {
-      _key: "Family",
+      _key: "Family.father",
       _formatter: function (data) {
+        console.log(data, 222);
+        console.log(arguments);
         // 自定义函数转换
         let result = [];
         for (const key in data) {

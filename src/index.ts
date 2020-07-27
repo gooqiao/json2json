@@ -8,7 +8,7 @@ function main() {
   const data = model;
   let convert = new Convert(data, map, Config);
   const result = convert.getData(data, map);
-  console.log(result);
+  console.log(JSON.stringify(result));
 }
 
 main();

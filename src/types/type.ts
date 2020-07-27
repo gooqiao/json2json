@@ -3,18 +3,16 @@ interface ConfigOptions {
 }
 
 interface ApiMap {
-  [key: string]: MapKey | MapOptions;
+  [key: string]: StringKey | MapOptions | ApiMap;
 }
 
-type MapKey = string | string[];
+type StringKey = string | string[];
 
 interface MapOptions {
   _key?: string;
-  _formatter?: <Data, Res>(data: Data, source?: Model) => Res;
+  _formatter?: <Data = unknown>(data: Data, source?: Model) => any;
   _includeKeys?: string[];
   _excludeKeys?: string[];
-
-  [key: string]: any;
 }
 
 type Model = unknown;
