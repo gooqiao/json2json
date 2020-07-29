@@ -1,5 +1,5 @@
 {
-  "name": "dc",
+  "name": "json2json",
   "version": "1.0.0",
   "description": "",
   "main": "lib/bundle.cjs.js",
@@ -11,6 +11,13 @@
   },
   "author": "gooqiao",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:gooqiao/json2json.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "dependencies": {
     "@types/lodash": "^4.14.157",
     "jsonpath": "^1.0.0",
