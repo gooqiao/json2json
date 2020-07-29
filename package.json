@@ -1,5 +1,5 @@
 {
-  "name": "json2json",
+  "name": "@gooqiao/json2json",
   "version": "1.0.0",
   "description": "",
   "main": "lib/bundle.cjs.js",
