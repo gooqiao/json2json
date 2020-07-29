@@ -7,7 +7,7 @@ import {
   isFunction,
   isObject,
 } from "./utils/types";
-import { cloneDeep } from "lodash";
+import cloneDeep from "lodash/cloneDeep";
 
 function isPrivateKey(key: string) {
   return key[0] === "_" || key[0] === "$";

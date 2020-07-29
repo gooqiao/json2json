@@ -1,5 +1,5 @@
 interface ConfigOptions {
-  unknownField?: "include" | "exclude";
+  unknownField?: "include" | "exclude"; // 未声明字段的处理方式
 }
 
 interface ApiMap {

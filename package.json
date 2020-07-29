@@ -2,14 +2,14 @@
   "name": "dc",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.ts",
+  "main": "lib/bundle.cjs.js",
   "module": "lib/bundle.esm.js",
   "scripts": {
     "build": "rollup -c",
     "dev": "npm run build && node lib/bundle.esm.js ",
     "test": "jest --no-cache"
   },
-  "author": "",
+  "author": "gooqiao",
   "license": "ISC",
   "dependencies": {
     "@types/lodash": "^4.14.157",
