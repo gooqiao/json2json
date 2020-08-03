@@ -1,5 +1,5 @@
 
-import typescript from "rollup-plugin-typescript";
+import typescript from "rollup-plugin-typescript2";
 import sourceMaps from "rollup-plugin-sourcemaps";
 
 export default {
@@ -8,7 +8,8 @@ export default {
     plugins: [
         typescript({
             exclude: "node_modules/**",
-            typescript: require("typescript")
+            typescript: require("typescript"),
+            declaration: true
         }),
         sourceMaps()
     ],
