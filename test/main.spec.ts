@@ -1,4 +1,4 @@
-import Convert from "../src/main";
+import Convert from "../src/index";
 
 let convert = new Convert({
   unknownField: "exclude",
@@ -100,4 +100,53 @@ test("基本类型值的key", () => {
       },
     });
   }).toThrow(Error);
+});
+
+test("_excludeKeys", () => {
+  const res = new Convert({
+    unknownField: "include",
+  }).getData(model, {
+    family: {
+      _key: "Family",
+      name: {
+        _key: "father",
+        _excludeKeys: ["name"],
+      },
+    },
+  });
+  const data = (res as any).family;
+  expect(data).toEqual({});
+});
+
+test("_includeKeys", () => {
+  const res = new Convert({
+    unknownField: "exclude",
+  }).getData(model, {
+    family: {
+      _key: "Family",
+      father: {
+        _key: "father",
+        _includeKeys: ["name"],
+      },
+    },
+  });
+  const data = (res as any).family;
+  expect(data).toEqual({ father: { name: "jjkjj" } });
+});
+
+test("_includeKeys、_excludeKeys 同时存在, 只应用_includeKeys, ", () => {
+  const res = new Convert({
+    unknownField: "exclude",
+  }).getData(model, {
+    family: {
+      _key: "Family",
+      father: {
+        _key: "father",
+        _excludeKeys: ["name"],
+        _includeKeys: ["name"],
+      },
+    },
+  });
+  const data = (res as any).family;
+  expect(data).toEqual({ father: { name: "jjkjj" } });
 });

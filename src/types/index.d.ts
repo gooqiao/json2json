@@ -10,11 +10,9 @@ type StringKey = string | string[];
 
 interface MapOptions {
   _key?: string;
-  _formatter?: <Data = unknown>(data: Data, source?: Model) => any;
+  _formatter?: <Data = unknown>(data: Data, source?: Model) => unknown;
   _includeKeys?: string[];
   _excludeKeys?: string[];
 }
 
 type Model = unknown;
-
-// type MapResult =
